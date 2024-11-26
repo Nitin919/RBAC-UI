@@ -1,4 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# RBAC UI - Role-Based Access Control User Interface
+
+This project is a comprehensive Role-Based Access Control (RBAC) User Interface built with Next.js, React, and TypeScript. It provides a modern and intuitive dashboard for managing users, roles, and permissions in a secure environment.
+
+## Features
+
+- **User Management**: Add, edit, and delete users. Manage user statuses (active/inactive).
+- **Role Management**: Create, update, and delete roles.
+- **Permission Management**: Assign and manage permissions for each role.
+- **Activity Logs**: View user activity logs to track actions within the system.
+- **Password Management**: Allow users to change their passwords securely.
+- **Two-Factor Authentication**: Set up and manage 2FA for enhanced security.
+- **Dashboard**: View key statistics and metrics at a glance.
+- **Responsive Design**: Fully responsive UI that works on desktop and mobile devices.
+- **Dark Mode**: Toggle between light and dark themes for comfortable viewing.
+
+## Technologies Used
+
+- Next.js 13 (App Router)
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion for animations
+- Lucide React for icons
+- shadcn/ui for UI components
 
 ## Getting Started
 
