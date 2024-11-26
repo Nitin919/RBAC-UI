@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { fetchUsers, fetchRoles, fetchPermissions } from '../utils/api'
-import { Users, Shield, Key } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { fetchUsers, fetchRoles, fetchPermissions } from '../utils/api';
+import { Users, Shield, Key } from 'lucide-react';
 
 interface User {
-  status: 'active' | 'inactive' // or other possible values for status
-  // Include other properties of the user here if needed
+  status: 'active' | 'inactive';
 }
 
 interface Stats {
-  totalUsers: number
-  activeUsers: number
-  totalRoles: number
-  totalPermissions: number
+  totalUsers: number;
+  activeUsers: number;
+  totalRoles: number;
+  totalPermissions: number;
 }
 
 const Dashboard = () => {
@@ -21,43 +20,37 @@ const Dashboard = () => {
     activeUsers: 0,
     totalRoles: 0,
     totalPermissions: 0,
-  })
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
+  });
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const loadStats = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         const [users, roles, permissions] = await Promise.all([
           fetchUsers(),
           fetchRoles(),
           fetchPermissions(),
-        ])
+        ]);
 
-        // TypeScript now knows that `users` is an array of `User` objects
         setStats({
           totalUsers: users.length,
           activeUsers: users.filter((user: User) => user.status === 'active').length,
           totalRoles: roles.length,
           totalPermissions: Object.keys(permissions).length,
-        })
-      } catch (err) {
-        setError('Failed to load data.')
+        });
+      } catch {
+        alert('Failed to load data.');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadStats()
-  }, [])
+    loadStats();
+  }, []);
 
   if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -102,7 +95,7 @@ const Dashboard = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -3,6 +3,7 @@ import { setupTwoFactorAuth, verifyTwoFactorAuth } from '../utils/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 const TwoFactorAuth = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState('');
@@ -15,7 +16,7 @@ const TwoFactorAuth = () => {
     try {
       const { qrCode } = await setupTwoFactorAuth();
       setQrCodeUrl(qrCode);
-    } catch (error) {
+    } catch {
       alert('Failed to set up Two-Factor Authentication. Please try again.');
     } finally {
       setLoading(false);
@@ -28,7 +29,7 @@ const TwoFactorAuth = () => {
       await verifyTwoFactorAuth(verificationCode);
       setIsSetupComplete(true);
       alert('Two-Factor Authentication setup complete!');
-    } catch (error) {
+    } catch {
       alert('Verification failed. Please check the code and try again.');
     } finally {
       setLoading(false);
@@ -51,7 +52,13 @@ const TwoFactorAuth = () => {
         {/* QR Code and Verification Input */}
         {qrCodeUrl && !isSetupComplete && (
           <div className="space-y-4">
-            <img src={qrCodeUrl} alt="QR Code for 2FA" className="mx-auto" />
+            <Image
+              src={qrCodeUrl}
+              alt="QR Code for 2FA"
+              className="mx-auto"
+              width={200}  // Adjust according to your needs
+              height={200} // Adjust according to your needs
+            />
             <Input
               type="text"
               placeholder="Enter verification code"
